@@ -9,8 +9,8 @@
         <!-- Navigation bar Area -->
         
         <!-- Job Area -->
-        <div class="">
-            <div class="job">
+        <div class="container-fluid">
+            <div class="">
                 <p><c:out value="${selectedJob.title}" /></p><br>
                 <p>
                     <c:out value="${selectedJob.city}" />&#44;&nbsp;
