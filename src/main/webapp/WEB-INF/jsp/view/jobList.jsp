@@ -33,7 +33,7 @@
         <!-- Jobs Area -->
         <div class="main-content">
             <c:forEach items="${jobs}" var="job" begin="${begin}" end="${end}">
-                <div class="">
+                <div class="card" style="padding: 1%; margin: 10px 25% 10px 0; ">
                     <a
                         href="<c:url value="/jobs">
                             <c:param name="action" value="viewJob" />
@@ -45,8 +45,8 @@
                         <c:out value="${job.state}" />
                     </p>
                     <p><c:out value="${job.department}" /></p><br>
+                </div>
             </c:forEach>
-            </div>
         </div><br>
         <!-- Pagination Area -->
         <div style="margin-left:auto; margin-right:auto;">
