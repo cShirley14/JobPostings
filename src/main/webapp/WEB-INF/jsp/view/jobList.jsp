@@ -13,7 +13,7 @@
     </head>
     <body>
         <!-- Navigation bar Area (img courtesy of pixabay creative commons) -->
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary ">
             <a class="navbar-brand" 
                href="<c:url value="/jobs">
                     <c:param name="action" value="defaultList" />
