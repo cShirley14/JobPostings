@@ -31,6 +31,13 @@
                 </ul>
         </nav>
         <!-- Jobs Area -->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Our Current Openings<img src="https://cdn.pixabay.com/photo/2016/09/16/19/15/gear-1674891_960_720.png" style="width:100px; border-radius:25%; float: right;" /></h1>
+              <p class="lead">Are you ready to launch your career?</p>
+            </div>
+          </div>
+        
         <div class="main-content">
             <c:forEach items="${jobs}" var="job" begin="${begin}" end="${end}">
                 <div class="card" style="padding: 1%; margin: 10px 25% 10px 0; ">
