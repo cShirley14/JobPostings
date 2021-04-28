@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Jobs</title>
+        <script src="scripts/jquery-3.6.0.min.js" type="text/javascript"></script>
         <link href="styles/main.css" rel="stylesheet" type="text/css"/>
         <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="styles/bootstrap-reboot.min.css" 
@@ -21,6 +22,10 @@
                    width="30" height="30" style="border-radius:25%;" 
                    class="d-inline-block align-top" 
                    alt="">&nbsp;Jobs</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Applications<span class="sr-only"></span></a>
@@ -29,6 +34,7 @@
                       <a class="nav-link" href="#">Login</a>
                     </li>
                 </ul>
+            </div>
         </nav>
         <!-- Jobs Area -->
         <div class="jumbotron jumbotron-fluid">

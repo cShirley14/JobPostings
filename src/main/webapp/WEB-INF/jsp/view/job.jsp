@@ -22,6 +22,10 @@
                    width="30" height="30" style="border-radius:25%;" 
                    class="d-inline-block align-top" 
                    alt="">&nbsp;Jobs</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Applications<span class="sr-only"></span></a>
@@ -30,6 +34,7 @@
                       <a class="nav-link" href="#">Login</a>
                     </li>
                 </ul>
+            </div>
         </nav>
         <!-- Job Area -->
         <!-- Job Description -->
@@ -61,12 +66,18 @@
                 </div>
             </div>
         </div>
-        <div class="list-group" id="formBox">
+        <div class="list-group-flush">
             <div class="list-group-item">
                 <form>
-                    <div class="form-group" id="formBox" >
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" >
+                    <div class="form-group" id="formBox"  >
+                        <div class="list-group-item" style="min-width:450px;">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" >
+                        </div>
+                        <div class="list-group-item">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" >
+                        </div>
                     </div>
                 </form>
             </div>
