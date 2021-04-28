@@ -37,9 +37,9 @@
             </div>
         </nav>
         <!-- Jobs Area -->
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid overflow-hidden">
             <div class="container">
-              <h1 class="display-4">Our Current Openings<img src="https://cdn.pixabay.com/photo/2016/09/16/19/15/gear-1674891_960_720.png" style="width:100px; border-radius:25%; float: right;" /></h1>
+              <h1 class="display-4">Our Current Openings<img src="https://cdn.pixabay.com/photo/2016/09/16/19/15/gear-1674891_960_720.png" style="width:100px; border-radius:25%; float: right; padding:5px;" /></h1>
               <p class="lead">Are you ready to launch your career?</p>
             </div>
           </div>
