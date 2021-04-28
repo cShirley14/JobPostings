@@ -20,6 +20,7 @@ public class Job implements Comparable<Job>{
     private String experience;
     private String wageCategory;
     private double salary;
+    private String jobDescription;
 
     /**
      * Zero-Argument constructor to
@@ -38,6 +39,7 @@ public class Job implements Comparable<Job>{
         this.experience = "";
         this.wageCategory = "";
         this.salary = 0;
+        this.jobDescription = "";
     }
 
     /**
@@ -56,7 +58,7 @@ public class Job implements Comparable<Job>{
      * @param wageCategory
      * @param salary 
      */
-    public Job(int id, boolean active, LocalDate dateCreated, String title, String city, String state, boolean fullTime, String department, String experience, String wageCategory, double salary) {
+    public Job(int id, boolean active, LocalDate dateCreated, String title, String city, String state, boolean fullTime, String department, String experience, String wageCategory, double salary, String jobDescription) {
         this.id = id;
         this.active = active;
         this.dateCreated = dateCreated;
@@ -68,6 +70,7 @@ public class Job implements Comparable<Job>{
         this.experience = experience;
         this.wageCategory = wageCategory;
         this.salary = salary;
+        this.jobDescription = jobDescription;
     }
 
     /**
@@ -297,6 +300,20 @@ public class Job implements Comparable<Job>{
      */
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+    
+    /**
+     * Accessor that returns the job
+     * description.
+     * 
+     * @return 
+     */
+    public String getJobDescription() {
+        return jobDescription;
+    }
+    
+    public void setjobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
     }
 
     /**

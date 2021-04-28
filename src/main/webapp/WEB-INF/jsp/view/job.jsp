@@ -55,6 +55,7 @@
                         <fmt:formatNumber value ="${selectedJob.salary}" 
                                           type="currency" currencyCode="USD" />
                     </p><br>
+                     <p><c:out value="${selectedJob.jobDescription}" /></p>
                 </div>
             </div>
         </div>

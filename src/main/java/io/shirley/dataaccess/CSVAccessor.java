@@ -57,6 +57,7 @@ public class CSVAccessor {
             String experience;
             String wageCategory;
             double salary;
+            String jobDescription;
             
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
                     "MM-dd-yyyy");
@@ -79,9 +80,10 @@ public class CSVAccessor {
                         experience = fields[8];
                         wageCategory = fields[9];
                         salary = Double.parseDouble(fields[10]);
+                        jobDescription = fields[11];
                         jobs.add(new Job(id, active, dateCreated,title,
                             city,state,fullTime,department,experience,
-                            wageCategory,salary));
+                            wageCategory,salary,jobDescription));
                     }
                 } catch (Exception ex) {
                     throw new Exception(ex + "Exception occurred on line " + lineCount);
