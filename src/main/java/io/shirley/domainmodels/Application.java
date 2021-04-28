@@ -27,6 +27,7 @@ public class Application implements Comparator<Application> {
     private String resumeError;
     private String startDateError;
     private String invalidDataError;
+    private String jobTitle;
 
     public Application() {
         this.firstName = "";
@@ -47,6 +48,7 @@ public class Application implements Comparator<Application> {
         this.resumeError = "";
         this.startDateError = "";
         this.invalidDataError = "";
+        this.jobTitle = "";
     }
 
     public String getFirstName() {
@@ -193,9 +195,17 @@ public class Application implements Comparator<Application> {
         this.invalidDataError = invalidDataError;
     }
 
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
     @Override
     public String toString() {
-        return "Application{" + "firstName=" + firstName + ", lastName=" + lastName + '}';
+        return "Job Title: " + jobTitle + "\nFirst Name: " + firstName + " Last name: " + lastName;
     }
 
     @Override
