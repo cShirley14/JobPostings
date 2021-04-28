@@ -69,7 +69,7 @@ public class JobsServlet extends HttpServlet {
     private void viewList(HttpServletRequest request, HttpServletResponse response) {
         try {
             if (_preLoadedJobs == null) {
-                String relativeWebPath = "/WEB-INF/Assets/job-data - Sheet1.tsv";
+                String relativeWebPath = "/WEB-INF/assets/job-data-Sheet1.tsv";
                 String absoluteFilePath = getServletContext().getRealPath(relativeWebPath);
                 _preLoadedJobs = _jobsManager.RetrieveJobs(absoluteFilePath);
             }
