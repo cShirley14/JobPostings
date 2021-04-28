@@ -1,6 +1,9 @@
 package io.shirley.domainmodels;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Date;
 
 /**
  * Represents Job Postings
@@ -12,6 +15,7 @@ public class Job implements Comparable<Job>{
     private int id;
     private boolean active;
     private LocalDate dateCreated;
+    private Date convDateCreated;
     private String title;
     private String city;
     private String state;
@@ -132,6 +136,9 @@ public class Job implements Comparable<Job>{
      * @param dateCreated 
      */
     public void setDateCreated(LocalDate dateCreated) {
+        ZoneId userZoneId = ZoneId.systemDefault();
+        Date date = Date.from(dateCreated.atStartOfDay().toInstant(ZoneOffset.UTC));
+        setConvDateCreated(date);
         this.dateCreated = dateCreated;
     }
 
@@ -314,6 +321,24 @@ public class Job implements Comparable<Job>{
     
     public void setjobDescription(String jobDescription) {
         this.jobDescription = jobDescription;
+    }
+    
+    /**
+     * Accessor for converted LocalDate.
+     * 
+     * @return 
+     */
+    public Date getConvDateCreated() {
+        return convDateCreated;
+    }
+
+    /**
+     * Mutator for converted LocalDate
+     * 
+     * @param convDateCreated 
+     */
+    public void setConvDateCreated(Date convDateCreated) {
+        this.convDateCreated = convDateCreated;
     }
 
     /**

@@ -23,18 +23,4 @@
     min-height: 500px;
     margin-left: 25%;
 }
-.indvdl-card {
-    width: inherit;
-    min-width: 100px;
-    max-width: 500px;
-}
 
-#card-area {
-    margin: 3%;
-    float: left;
-}
-
-#formBox {
-    float: left;
-    margin: 3% 0 ;
-}
