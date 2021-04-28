@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JobsServlet extends HttpServlet {
     private JobsManager _jobsManager = new JobsManager();
+    private SortedSet<Job> _preLoadedJobs;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +34,56 @@ public class JobsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "defaultList";
+        }
         
+        switch (action) {
+            case "defaultList":
+                viewList(request, response);
+                break;
+            case "viewJob":
+                viewjob(request, response);
+                break;
+            default:
+                viewList(request, response);
+                break;
+        }
+    }
+    
+        /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String test = "hello";
+    }
+
+    private void viewList(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String relativeWebPath = "/WEB-INF/Assets/job-data - Sheet1.tsv";
-            String absoluteFilePath = getServletContext().getRealPath(relativeWebPath);
-            SortedSet<Job> jobs = _jobsManager.RetrieveJobs(absoluteFilePath);
+            if (_preLoadedJobs == null) {
+                String relativeWebPath = "/WEB-INF/Assets/job-data - Sheet1.tsv";
+                String absoluteFilePath = getServletContext().getRealPath(relativeWebPath);
+                _preLoadedJobs = _jobsManager.RetrieveJobs(absoluteFilePath);
+            }
+            
             String app = "application";
             String log = "login";
             int jobsPerPage = 4;
             int begin = 0;
             int end = 0;
-            int maxPages = jobs.size() / jobsPerPage;
-            if (jobs.size() % jobsPerPage != 0) {
+            int maxPages = _preLoadedJobs.size() / jobsPerPage;
+            if (_preLoadedJobs.size() % jobsPerPage != 0) {
                 maxPages++;
             }
-            
+
             String currPage = request.getParameter("page");
             int page = 1;
             if (currPage != null && !currPage.equals("")) {
@@ -64,20 +100,41 @@ public class JobsServlet extends HttpServlet {
             }
             begin = (page - 1) * jobsPerPage;
             end = begin + jobsPerPage - 1;
-            
-            request.setAttribute("jobs", jobs);
+
+            request.setAttribute("jobs", _preLoadedJobs);
             request.setAttribute("app", app);
             request.setAttribute("log", log);
-            request.setAttribute("begin", jobs);
             request.setAttribute("begin", begin);
             request.setAttribute("end", end);
             request.setAttribute("maxPages", maxPages);
             request.setAttribute("currPage", page);
-            request.getRequestDispatcher("/WEB-INF/jsp/view/jobs.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/view/jobList.jsp").forward(request, response);
         } catch (Exception ex) {
-            // No jobs show error page
+            // Show error page
         }
-            
+    }   
+
+    private void viewjob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String selectedJobID = request.getParameter("job");
+        if (_preLoadedJobs != null) {
+            try {
+                int jobID = Integer.parseInt(selectedJobID);
+                for (Job job : _preLoadedJobs) {
+                    if (job.getId() == jobID) {
+                        Job selectedJob = job;
+                        request.setAttribute("selectedJob", selectedJob);
+                        request.getRequestDispatcher("/WEB-INF/jsp/view/job.jsp").forward(request, response);
+                    }
+                }
+                // else show jobs
+                viewList(request, response);
+            } catch (NumberFormatException nfe) {
+                request.setAttribute("action", null);
+                viewList(request, response);
+            }
+        }
+        else { // Take 
+            viewList(request, response);
         }
     }
-//
+}
