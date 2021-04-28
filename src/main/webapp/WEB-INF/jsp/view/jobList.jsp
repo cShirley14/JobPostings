@@ -49,7 +49,7 @@
             </c:forEach>
         </div><br>
         <!-- Pagination Area -->
-        <div style="margin-left:auto; margin-right:auto;">
+        <div>
             <div class="pagination justify-content-center">
                 <c:forEach var="pageNum" begin="1" end="${maxPages}">
                     <a

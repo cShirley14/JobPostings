@@ -23,3 +23,10 @@
     min-height: 500px;
     margin-left: 25%;
 }
+.indvdl-card {
+    width: 45%;
+}
+
+#card-area {
+    margin: 3%;
+}
