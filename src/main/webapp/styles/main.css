@@ -20,6 +20,6 @@
 }
 
 .main-content {
-    display: flex;
-    justify-content: center;
+    min-height: 500px;
+    margin-left: 25%;
 }

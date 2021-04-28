@@ -6,15 +6,29 @@
         <title>Jobs</title>
         <link href="styles/main.css" rel="stylesheet" type="text/css"/>
         <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="styles/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
+        <link href="styles/bootstrap-reboot.min.css" 
+              rel="stylesheet" type="text/css"/>
+        <script src="scripts/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <script src="scripts/bootstrap.min.js" type="text/javascript"></script>
     </head>
     <body>
-        <!-- Navigation bar Area -->
-        <nav class="navbar navbar-light bg-light">
+        <!-- Navigation bar Area (img courtesy of pixabay creative commons) -->
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
             <a class="navbar-brand" 
                href="<c:url value="/jobs">
                     <c:param name="action" value="defaultList" />
-               </c:url>">Jobs</a>
+               </c:url>"><img src="https://cdn.pixabay.com/photo/2016/09/16/19/15/gear-1674891_960_720.png" 
+                   width="30" height="30" style="border-radius:25%;" 
+                   class="d-inline-block align-top" 
+                   alt="">&nbsp;Jobs</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Applications<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Login</a>
+                    </li>
+                </ul>
         </nav>
         <!-- Jobs Area -->
         <div class="main-content">
@@ -33,7 +47,7 @@
                     <p><c:out value="${job.department}" /></p><br>
             </c:forEach>
             </div>
-        </div>
+        </div><br>
         <!-- Pagination Area -->
         <div style="margin-left:auto; margin-right:auto;">
             <div class="pagination justify-content-center">
