@@ -29,4 +29,10 @@
 
 #card-area {
     margin: 3%;
+    float: left;
+}
+
+#formBox {
+    float: left;
+    margin: 3%;
 }

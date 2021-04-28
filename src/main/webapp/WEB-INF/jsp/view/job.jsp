@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Viewing <c:out value="${selectedJob.title}" /></title>
+        <script src="scripts/jquery-3.6.0.min.js" type="text/javascript"></script>
         <link href="styles/main.css" rel="stylesheet" type="text/css"/>
         <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="styles/bootstrap-reboot.min.css" 
@@ -31,6 +32,7 @@
                 </ul>
         </nav>
         <!-- Job Area -->
+        <!-- Job Description -->
         <div class="card indvdl-card" id="card-area">
             <div class="card-body">
                 <div class="card-text">
@@ -57,6 +59,16 @@
                     </p><br>
                      <p><c:out value="${selectedJob.jobDescription}" /></p>
                 </div>
+            </div>
+        </div>
+        <div class="list-group" id="formBox">
+            <div class="list-group-item">
+                <form>
+                    <div class="form-group" id="formBox" >
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" >
+                    </div>
+                </form>
             </div>
         </div>
     </body>
