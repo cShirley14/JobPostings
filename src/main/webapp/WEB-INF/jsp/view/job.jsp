@@ -86,6 +86,22 @@
                           <label for="email">Email</label>
                           <input type="email" class="form-control" id="email" placeholder="Enter email">
                         </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" class="form-control" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Ex. 123-456-7890"> 
+                        </div>
+                        <div class="form-group">
+                            <label for="resumeAttach">Upload Resume</label>
+                            <input type="file" class="form-control-file" id="resumeAttach">
+                        </div>
+                        <div class="form-group">
+                          <label for="desSal">Desired Salary</label>
+                          <input type="text" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+">
+                        </div>
+                        <div class="form-group">
+                            <label for="earlStartDate">Earliest Start Date</label>
+                            <input type="text" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
