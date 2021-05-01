@@ -25,6 +25,7 @@ public class Application implements Comparable<Application> {
     private boolean emailError;
     private boolean phoneError;
     private boolean resumeError;
+    private boolean salaryError;
     private boolean startDateError;
     private boolean invalidDataError;
     private String invalidDataMessage;
@@ -47,6 +48,7 @@ public class Application implements Comparable<Application> {
         this.emailError = false;
         this.phoneError = false;
         this.resumeError = false;
+        this.salaryError = false;
         this.startDateError = false;
         this.invalidDataError = false;
         this.invalidDataMessage = "Invalid application entry.";
@@ -243,6 +245,14 @@ public class Application implements Comparable<Application> {
 
     public void setInvalidDataMessage(String invalidDataMessage) {
         this.invalidDataMessage = invalidDataMessage;
+    }
+
+    public boolean isSalaryError() {
+        return salaryError;
+    }
+
+    public void setSalaryError(boolean salaryError) {
+        this.salaryError = salaryError;
     }
     
     @Override
