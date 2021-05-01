@@ -8,7 +8,7 @@ import java.util.Comparator;
  *
  * @author Shirley
  */
-public class Application implements Comparator<Application> {
+public class Application implements Comparable<Application> {
     private String firstName;
     private String lastName;
     private String email;
@@ -209,10 +209,11 @@ public class Application implements Comparator<Application> {
     }
 
     @Override
-    public int compare(Application o1, Application o2) {
-        // Will Implement
-        return 0;
+    public int compareTo(Application other) {
+        return this.dateTimeSubmitted.compareTo(other.dateTimeSubmitted);
     }
+    
+    
     
     
 }
