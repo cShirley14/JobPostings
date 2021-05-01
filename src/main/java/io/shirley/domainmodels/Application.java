@@ -20,13 +20,14 @@ public class Application implements Comparable<Application> {
     private int jobId;
     private Instant dateTimeSubmitted;
     private boolean active;
-    private String firstNameError;
-    private String lastNameError;
-    private String emailError;
-    private String phoneError;
-    private String resumeError;
-    private String startDateError;
-    private String invalidDataError;
+    private boolean firstNameError;
+    private boolean lastNameError;
+    private boolean emailError;
+    private boolean phoneError;
+    private boolean resumeError;
+    private boolean startDateError;
+    private boolean invalidDataError;
+    private String invalidDataMessage;
     private String jobTitle;
 
     public Application() {
@@ -41,15 +42,48 @@ public class Application implements Comparable<Application> {
         this.jobId = 0;
         this.dateTimeSubmitted = null;
         this.active = false;
-        this.firstNameError = "";
-        this.lastNameError = "";
-        this.emailError = "";
-        this.phoneError = "";
-        this.resumeError = "";
-        this.startDateError = "";
-        this.invalidDataError = "";
+        this.firstNameError = false;
+        this.lastNameError = false;
+        this.emailError = false;
+        this.phoneError = false;
+        this.resumeError = false;
+        this.startDateError = false;
+        this.invalidDataError = false;
+        this.invalidDataMessage = "Invalid application entry.";
         this.jobTitle = "";
     }
+
+    public Application(String firstName, String lastName, String email, 
+            String phone, Attachment attachment, double desiredSalary, 
+            LocalDate earliestStartDate, int id, int jobId, 
+            Instant dateTimeSubmitted, boolean active, boolean firstNameError, 
+            boolean lastNameError, boolean emailError, boolean phoneError, 
+            boolean resumeError, boolean startDateError, 
+            boolean invalidDataError, String invalidDataMessage, 
+            String jobTitle) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.attachment = attachment;
+        this.desiredSalary = desiredSalary;
+        this.earliestStartDate = earliestStartDate;
+        this.id = id;
+        this.jobId = jobId;
+        this.dateTimeSubmitted = dateTimeSubmitted;
+        this.active = active;
+        this.firstNameError = firstNameError;
+        this.lastNameError = lastNameError;
+        this.emailError = emailError;
+        this.phoneError = phoneError;
+        this.resumeError = resumeError;
+        this.startDateError = startDateError;
+        this.invalidDataError = invalidDataError;
+        this.invalidDataMessage = invalidDataMessage;
+        this.jobTitle = jobTitle;
+    }
+    
+    
 
     public String getFirstName() {
         return firstName;
@@ -139,59 +173,59 @@ public class Application implements Comparable<Application> {
         this.active = active;
     }
 
-    public String getFirstNameError() {
+    public boolean getFirstNameError() {
         return firstNameError;
     }
 
-    public void setFirstNameError(String firstNameError) {
+    public void setFirstNameError(boolean firstNameError) {
         this.firstNameError = firstNameError;
     }
 
-    public String getLastNameError() {
+    public boolean getLastNameError() {
         return lastNameError;
     }
 
-    public void setLastNameError(String lastNameError) {
+    public void setLastNameError(boolean lastNameError) {
         this.lastNameError = lastNameError;
     }
 
-    public String getEmailError() {
+    public boolean getEmailError() {
         return emailError;
     }
 
-    public void setEmailError(String emailError) {
+    public void setEmailError(boolean emailError) {
         this.emailError = emailError;
     }
 
-    public String getPhoneError() {
+    public boolean getPhoneError() {
         return phoneError;
     }
 
-    public void setPhoneError(String phoneError) {
+    public void setPhoneError(boolean phoneError) {
         this.phoneError = phoneError;
     }
 
-    public String getResumeError() {
+    public boolean getResumeError() {
         return resumeError;
     }
 
-    public void setResumeError(String resumeError) {
+    public void setResumeError(boolean resumeError) {
         this.resumeError = resumeError;
     }
 
-    public String getStartDateError() {
+    public boolean getStartDateError() {
         return startDateError;
     }
 
-    public void setStartDateError(String startDateError) {
+    public void setStartDateError(boolean startDateError) {
         this.startDateError = startDateError;
     }
 
-    public String getInvalidDataError() {
+    public boolean getInvalidDataError() {
         return invalidDataError;
     }
 
-    public void setInvalidDataError(String invalidDataError) {
+    public void setInvalidDataError(boolean invalidDataError) {
         this.invalidDataError = invalidDataError;
     }
 
@@ -203,6 +237,14 @@ public class Application implements Comparable<Application> {
         this.jobTitle = jobTitle;
     }
 
+    public String getInvalidDataMessage() {
+        return invalidDataMessage;
+    }
+
+    public void setInvalidDataMessage(String invalidDataMessage) {
+        this.invalidDataMessage = invalidDataMessage;
+    }
+    
     @Override
     public String toString() {
         return "Job Title: " + jobTitle + "\nFirst Name: " + firstName + " Last name: " + lastName;
