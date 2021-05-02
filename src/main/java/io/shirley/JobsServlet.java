@@ -38,7 +38,6 @@ public class JobsServlet extends HttpServlet {
         if (action == null) {
             action = "defaultList";
         }
-        
         switch (action) {
             case "defaultList":
                 viewList(request, response);

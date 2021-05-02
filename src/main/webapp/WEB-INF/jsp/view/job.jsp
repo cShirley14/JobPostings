@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="container-fluid" style="float: left; max-width: 500px; margin-top: 2%;">
-                    <form method="POST" action="applications" enctype="multipart/form-data">
+                    <form method="POST" action="applications" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" name="action" value="submitApp" />
                         <div class="form-group">
                           <label for="firstName">First Name</label>
