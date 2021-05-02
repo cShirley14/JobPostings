@@ -9,6 +9,7 @@
         <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="styles/bootstrap-reboot.min.css" 
               rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
         <script src="scripts/bootstrap.bundle.min.js" type="text/javascript"></script>
         <script src="scripts/bootstrap.min.js" type="text/javascript"></script>
     </head>
