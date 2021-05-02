@@ -73,36 +73,37 @@
                     </div>
                 </div>
                 <div class="container-fluid" style="float: left; max-width: 500px; margin-top: 2%;">
-                    <form>
+                    <form method="POST" action="applications" enctype="multipart/form-data">
+                        <input type="hidden" name="action" value="submitApp" />
                         <div class="form-group">
-                          <label for="firstName">Email address</label>
-                          <input type="text" class="form-control" id="firstName" placeholder="Enter First Name">
+                          <label for="firstName">First Name</label>
+                          <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name">
                         </div>
                         <div class="form-group">
                           <label for="lastName">Last Name</label>
-                          <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name">
+                          <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name">
                         </div>
                         <div class="form-group">
                           <label for="email">Email</label>
-                          <input type="email" class="form-control" id="email" placeholder="Enter email">
+                          <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone Number:</label>
+                            <label for="phone">Phone Number</label>
                             <input type="tel" id="phone" class="form-control" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Ex. 123-456-7890"> 
                         </div>
                         <div class="form-group">
                             <label for="resumeAttach">Upload Resume</label>
-                            <input type="file" class="form-control-file" id="resumeAttach">
+                            <input type="file" name="file" class="form-control-file" id="resumeAttach">
                         </div>
                         <div class="form-group">
                           <label for="desSal">Desired Salary</label>
-                          <input type="text" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+">
+                          <input type="text" name="desiredSalary" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+">
                         </div>
                         <div class="form-group">
                             <label for="earlStartDate">Earliest Start Date</label>
-                            <input type="text" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+                            <input type="text" name="earlyStartDate" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <input type="submit" class="btn btn-primary" value="Submit"/>
                     </form>
                 </div>
             </div>

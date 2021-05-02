@@ -43,7 +43,7 @@ public class ApplicationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.sendRedirect("jobs");
     }
 
     /**
@@ -87,11 +87,10 @@ public class ApplicationServlet extends HttpServlet {
      * @throws IOException
      */
     private void viewList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/jsp/view/jobList.jsp")
-                .forward(request, response);
+        response.sendRedirect("jobs");
     }
 
-    private void submitJobApplication(HttpServletRequest request, HttpServletResponse response) {
+    private void submitJobApplication(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         Application app = new Application();
         String firstName;
@@ -177,7 +176,7 @@ public class ApplicationServlet extends HttpServlet {
                     || app.getPhoneError() == true || app.getResumeError() == true
                     || app.getStartDateError() == true) {
                 // Redirect to application again to show error message(s).
-                request.getRequestDispatcher("/WEB-INF/jsp/view/job.jsp");
+                request.getRequestDispatcher("/WEB-INF/jsp/view/job.jsp").forward(request, response);
             } else {
                 // Set application ID
                 synchronized (this) {
@@ -187,10 +186,10 @@ public class ApplicationServlet extends HttpServlet {
                 // add successful job application
                 apps.add(app);
                 // Show success message on same page
-                request.getRequestDispatcher("/WEB-INF/jsp/view/job.jsp");
+                request.getRequestDispatcher("/WEB-INF/jsp/view/job.jsp").forward(request, response);
             }
         } catch (Exception ex) {
-            request.getRequestDispatcher("/WEB-INF/jsp/view/job.jsp");
+            request.getRequestDispatcher("/WEB-INF/jsp/view/job.jsp").forward(request, response);
         }
     }
 
