@@ -180,6 +180,8 @@ public class ApplicationServlet extends HttpServlet {
                     || app.getPhoneError() == true || app.getResumeError() == true
                     || app.getStartDateError() == true) {
                 // Redirect to application again to show error message(s).
+                HttpSession session = request.getSession();
+                session.setAttribute("unsubmittedApp", app);
                 response.sendRedirect("jobs?action=viewJob&job="+job);
             } else {
                 // Set application ID

@@ -84,13 +84,43 @@
                                 <input type="hidden" name="action" value="submitApp" />
                                 <input type="hidden" name="job" value="${selectedJob.id}" />
                                 <input type="hidden" name="active" value="${selectedJob.active}" />
+                                Unsub: ${unsubmittedApp.firstNameError == true}
+                                Sub: ${submittedApp == null}
                                 <div class="form-group">
-                                  <label for="firstName">First Name</label>
-                                  <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name">
+                                    <label for="firstName">First Name</label>
+                                    <c:choose>
+                                        <c:when test="${submittedApp == null && unsubmittedApp.firstNameError == true}" >
+                                            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name"><span style="color:firebrick">Invalid First Name</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:choose>
+                                                <c:when test="${unsubmittedApp != null}">
+                                                    <input type="text" name="firstName" class="form-control" id="firstName" value="${unsubmittedApp.firstName}">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name">
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <div class="form-group">
-                                  <label for="lastName">Last Name</label>
-                                  <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name">
+                                    <label for="lastName">Last Name</label>
+                                    <c:choose>
+                                        <c:when test="${submittedApp == null && unsubmittedApp.lastNameError == true}" >
+                                            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name"><span style="color:firebrick">Invalid Last Name</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:choose>
+                                                <c:when test="${unsubmittedApp != null}">
+                                                    <input type="text" name="lastName" class="form-control" id="lastName" value="${unsubmittedApp.lastName}">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name">
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <div class="form-group">
                                   <label for="email">Email</label>
@@ -99,6 +129,7 @@
                                 <div class="form-group">
                                     <label for="phone">Phone Number</label>
                                     <input type="tel" id="phone" class="form-control" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Ex. 123-456-7890"> 
+                                    <span style="font-weight: bold;">Required format: 123-456-7890</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="file">Upload Resume</label>
@@ -107,10 +138,12 @@
                                 <div class="form-group">
                                   <label for="desSal">Desired Salary</label>
                                   <input type="text" name="desiredSalary" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+">
+                                  <span style="font-weight: bold;">Required format: 25000 (digits only)</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="earlStartDate">Earliest Start Date</label>
                                     <input type="text" name="earlyStartDate" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+                                    <span style="font-weight: bold;">Required format: 01/29/2022</span>
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Submit"/>
                             </form>
