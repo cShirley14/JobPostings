@@ -29,12 +29,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Applications<span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Login</a>
-                        </li>
+                        <c:if test="${username == null}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<c:url value="/login"/>">Login</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${username != null}">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Applications<span class="sr-only"></span></a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="<c:url value="/login?logout" />">Logout</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </nav>
