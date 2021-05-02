@@ -171,6 +171,9 @@ public class ApplicationServlet extends HttpServlet {
                         app.setAttachment(attachment);
                     }
                 }
+                else {
+                    app.setResumeError(true);
+                }
             } catch (Exception ex) {
                 app.setResumeError(true);
             }
@@ -193,7 +196,9 @@ public class ApplicationServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("submittedApp", app);
                 apps.add(app);
+                session.setAttribute("applications", apps);
                 // Show success message on same page
+                session.setAttribute("unsubmittedApp", null);
                 response.sendRedirect("jobs?action=viewJob&job="+job);
             }
         } catch (Exception ex) {

@@ -73,24 +73,28 @@
                     </div>
                 </div>
                 <div class="container-fluid" style="float: left; max-width: 500px; margin-top: 2%;">
+                    <c:forEach var="app" items="${applications}">
+                        <c:if test="${app.jobId == selectedJob.id}">
+                            <c:set var="displaySuccess" value="true"/>
+                        </c:if>
+                    </c:forEach>
                     <c:choose>
-                        <c:when test="${submittedApp != null && submittedApp.jobId == selectedJob.id}" >
+                        <c:when test="${displaySuccess == true}">
                             <p style="color:green; font-weight:bold; text-align:center;">
                                 Your application has been submitted successfully!
                             </p>
+                            <c:set var="displaySuccess" value="false"/>
                         </c:when>
                         <c:otherwise>
                             <form method="post" action="applications" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="submitApp" />
                                 <input type="hidden" name="job" value="${selectedJob.id}" />
                                 <input type="hidden" name="active" value="${selectedJob.active}" />
-                                Unsub: ${unsubmittedApp.firstNameError == true}
-                                Sub: ${submittedApp == null}
                                 <div class="form-group">
                                     <label for="firstName">First Name</label>
                                     <c:choose>
-                                        <c:when test="${submittedApp == null && unsubmittedApp.firstNameError == true}" >
-                                            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name"><span style="color:firebrick">Invalid First Name</span>
+                                        <c:when test="${unsubmittedApp.firstNameError == true}" >
+                                            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name"><span style="font-weight: bold;color:firebrick">Invalid First Name</span>
                                         </c:when>
                                         <c:otherwise>
                                             <c:choose>
@@ -107,8 +111,8 @@
                                 <div class="form-group">
                                     <label for="lastName">Last Name</label>
                                     <c:choose>
-                                        <c:when test="${submittedApp == null && unsubmittedApp.lastNameError == true}" >
-                                            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name"><span style="color:firebrick">Invalid Last Name</span>
+                                        <c:when test="${unsubmittedApp.lastNameError == true}" >
+                                            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name"><span style="font-weight:bold;color:firebrick">Invalid Last Name</span>
                                         </c:when>
                                         <c:otherwise>
                                             <c:choose>
@@ -124,25 +128,89 @@
                                 </div>
                                 <div class="form-group">
                                   <label for="email">Email</label>
-                                  <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+                                  <c:choose>
+                                      <c:when test="${unsubmittedApp.emailError == true}" >
+                                            <input type="text" name="email" class="form-control" id="email" placeholder="Enter email"><span style="font-weight:bold;color:firebrick">Invalid email</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:choose>
+                                                <c:when test="${unsubmittedApp != null}">
+                                                    <input type="text" name="email" class="form-control" id="email" value="${unsubmittedApp.email}">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input type="text" name="email" class="form-control" id="email" placeholder="Enter email">
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:otherwise>
+                                  </c:choose>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone Number</label>
-                                    <input type="tel" id="phone" class="form-control" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Ex. 123-456-7890"> 
-                                    <span style="font-weight: bold;">Required format: 123-456-7890</span>
+                                    <c:choose>
+                                        <c:when test="${unsubmittedApp.phoneError == true}" >
+                                              <input type="text" name="phone" class="form-control" id="phone" placeholder="Ex. 123-456-7890"><span style="font-weight:bold;color:firebrick">Invalid Phone Number</span>
+                                          </c:when>
+                                          <c:otherwise>
+                                              <c:choose>
+                                                  <c:when test="${unsubmittedApp != null}">
+                                                      <input type="text" name="phone" class="form-control" id="phone" value="${unsubmittedApp.phone}">
+                                                  </c:when>
+                                                  <c:otherwise>
+                                                      <input type="text" name="phone" class="form-control" id="phone" placeholder="Ex. 123-456-7890">
+                                                  </c:otherwise>
+                                              </c:choose>
+                                          </c:otherwise>
+                                    </c:choose>
+                                    <span style="font-weight: bold;">Required format: 123 456 7890 with or without (-," ",.) </span>
                                 </div>
                                 <div class="form-group">
                                     <label for="file">Upload Resume</label>
-                                    <input type="file" name="file1" class="form-control-file" id="file">
+                                    <c:choose>
+                                        <c:when test="${unsubmittedApp.resumeError == true}" >
+                                              <input type="file" name="file1" class="form-control-file" id="file"><span style="font-weight:bold;color:firebrick">Resume Must Be Attached</span>
+                                          </c:when>
+                                          <c:otherwise>
+                                              <input type="file" name="file1" class="form-control-file" id="file">
+                                          </c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <div class="form-group">
                                   <label for="desSal">Desired Salary</label>
-                                  <input type="text" name="desiredSalary" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+">
+                                  <c:choose>
+                                        <c:when test="${unsubmittedApp.salaryError == true}" >
+                                              <input type="text" name="desiredSalary" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+"><span style="font-weight:bold;color:firebrick">Invalid Salary</span>
+                                          </c:when>
+                                          <c:otherwise>
+                                              <c:choose>
+                                                  <c:when test="${unsubmittedApp != null}">
+                                                      <input type="text" name="desiredSalary" class="form-control" id="desSal" 
+                                                             placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+" value="<fmt:formatNumber type="number" maxFractionDigits="0" groupingUsed="false" value="${unsubmittedApp.desiredSalary}" />">
+                                                  </c:when>
+                                                  <c:otherwise>
+                                                      <input type="text" name="desiredSalary" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+">
+                                                  </c:otherwise>
+                                              </c:choose>
+                                          </c:otherwise>
+                                    </c:choose>
                                   <span style="font-weight: bold;">Required format: 25000 (digits only)</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="earlStartDate">Earliest Start Date</label>
-                                    <input type="text" name="earlyStartDate" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+                                    <c:choose>
+                                        <c:when test="${unsubmittedApp.startDateError == true}" >
+                                              <input type="text" name="earlyStartDate" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"><span style="font-weight:bold;color:firebrick">Invalid Date, Must be in Future</span>
+                                          </c:when>
+                                          <c:otherwise>
+                                              <c:choose>
+                                                  <c:when test="${unsubmittedApp != null}">
+                                                      <input type="text" name="earlyStartDate" class="form-control" id="earlStartDate" value="${unsubmittedApp.earliestStartDate}" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+                                                  </c:when>
+                                                  <c:otherwise>
+                                                      <input type="text" name="earlyStartDate" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+                                                  </c:otherwise>
+                                              </c:choose>
+                                          </c:otherwise>
+                                    </c:choose>
                                     <span style="font-weight: bold;">Required format: 01/29/2022</span>
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Submit"/>
