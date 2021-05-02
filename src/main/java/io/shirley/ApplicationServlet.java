@@ -148,7 +148,12 @@ public class ApplicationServlet extends HttpServlet {
                 app.setSalaryError(true);
             }
             try {
-                app.setEarliestStartDate(LocalDate.parse(date,formatter));
+                LocalDate rawDate = LocalDate.parse(date,formatter);
+                if (rawDate.isAfter(LocalDate.now())) {
+                    app.setEarliestStartDate(rawDate);
+                } else {
+                    app.setStartDateError(true);
+                }
             } catch (Exception ex) {
                 app.setStartDateError(true);
             }
