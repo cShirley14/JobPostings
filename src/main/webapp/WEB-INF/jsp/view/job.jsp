@@ -73,38 +73,49 @@
                     </div>
                 </div>
                 <div class="container-fluid" style="float: left; max-width: 500px; margin-top: 2%;">
-                    <form method="POST" action="applications" enctype="application/x-www-form-urlencoded">
-                        <input type="hidden" name="action" value="submitApp" />
-                        <div class="form-group">
-                          <label for="firstName">First Name</label>
-                          <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name">
-                        </div>
-                        <div class="form-group">
-                          <label for="lastName">Last Name</label>
-                          <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name">
-                        </div>
-                        <div class="form-group">
-                          <label for="email">Email</label>
-                          <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Ex. 123-456-7890"> 
-                        </div>
-                        <div class="form-group">
-                            <label for="resumeAttach">Upload Resume</label>
-                            <input type="file" name="file" class="form-control-file" id="resumeAttach">
-                        </div>
-                        <div class="form-group">
-                          <label for="desSal">Desired Salary</label>
-                          <input type="text" name="desiredSalary" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+">
-                        </div>
-                        <div class="form-group">
-                            <label for="earlStartDate">Earliest Start Date</label>
-                            <input type="text" name="earlyStartDate" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
-                        </div>
-                        <input type="submit" class="btn btn-primary" value="Submit"/>
-                    </form>
+                    <c:choose>
+                        <c:when test="${submittedApp != null && submittedApp.jobId == selectedJob.id}" >
+                            <p style="color:green; font-weight:bold; text-align:center;">
+                                Your application has been submitted successfully!
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <form method="post" action="applications" enctype="multipart/form-data">
+                                <input type="hidden" name="action" value="submitApp" />
+                                <input type="hidden" name="job" value="${selectedJob.id}" />
+                                <input type="hidden" name="active" value="${selectedJob.active}" />
+                                <div class="form-group">
+                                  <label for="firstName">First Name</label>
+                                  <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name">
+                                </div>
+                                <div class="form-group">
+                                  <label for="lastName">Last Name</label>
+                                  <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name">
+                                </div>
+                                <div class="form-group">
+                                  <label for="email">Email</label>
+                                  <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" class="form-control" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Ex. 123-456-7890"> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="file">Upload Resume</label>
+                                    <input type="file" name="file1" class="form-control-file" id="file">
+                                </div>
+                                <div class="form-group">
+                                  <label for="desSal">Desired Salary</label>
+                                  <input type="text" name="desiredSalary" class="form-control" id="desSal" placeholder="Enter only numbers: Ex. 25000" pattern="[0-9]+">
+                                </div>
+                                <div class="form-group">
+                                    <label for="earlStartDate">Earliest Start Date</label>
+                                    <input type="text" name="earlyStartDate" class="form-control" id="earlStartDate" placeholder="Required format: Ex. 01/29/2022" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Submit"/>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </main>
