@@ -262,7 +262,7 @@ public class Application implements Comparable<Application> {
 
     @Override
     public int compareTo(Application other) {
-        return this.dateTimeSubmitted.compareTo(other.dateTimeSubmitted);
+        return other.dateTimeSubmitted.compareTo(this.dateTimeSubmitted);
     }
     
     

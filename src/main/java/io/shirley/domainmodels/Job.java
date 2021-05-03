@@ -372,10 +372,10 @@ public class Job implements Comparable<Job>{
      */
     @Override
     public int compareTo(Job other) {
-        if (this.dateCreated.compareTo(other.dateCreated) != 0) {
-            return this.dateCreated.compareTo(other.dateCreated);
+        if (other.dateCreated.compareTo(this.dateCreated) != 0) {
+            return other.dateCreated.compareTo(this.dateCreated);
         } else {
-            return this.title.compareTo(other.title);
+            return other.title.compareTo(this.title);
         }
     }
     

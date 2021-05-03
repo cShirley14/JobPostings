@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -207,6 +208,7 @@ public class ApplicationServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("submittedApp", app);
                 app.setJobTitle(jobTitle);
+                app.setDateTimeSubmitted(Instant.now());
                 _apps.add(app);
                 session.setAttribute("applications", _apps);
                 // Show success message on same page
