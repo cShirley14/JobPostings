@@ -98,7 +98,7 @@
                                 <input type="hidden" name="action" value="submitApp" />
                                 <input type="hidden" name="job" value="${selectedJob.id}" />
                                 <input type="hidden" name="active" value="${selectedJob.active}" />
-                                <input type="hidden" name="jobTitle" value="${selectedJob.title}" />
+                                <input type="hidden" name="jobTitle" value="<c:out value="${selectedJob.title}"></c:out>" />
                                 <div class="form-group">
                                     <label for="firstName">First Name</label>
                                     <c:choose>
@@ -108,7 +108,7 @@
                                         <c:otherwise>
                                             <c:choose>
                                                 <c:when test="${unsubmittedApp != null}">
-                                                    <input type="text" name="firstName" class="form-control" id="firstName" value="${unsubmittedApp.firstName}">
+                                                    <input type="text" name="firstName" class="form-control" id="firstName" value="<c:out value="${unsubmittedApp.firstName}"></c:out>">
                                                 </c:when>
                                                 <c:otherwise>
                                                     <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name">
@@ -126,7 +126,7 @@
                                         <c:otherwise>
                                             <c:choose>
                                                 <c:when test="${unsubmittedApp != null}">
-                                                    <input type="text" name="lastName" class="form-control" id="lastName" value="${unsubmittedApp.lastName}">
+                                                    <input type="text" name="lastName" class="form-control" id="lastName" value="<c:out value="${unsubmittedApp.lastName}"></c:out>">
                                                 </c:when>
                                                 <c:otherwise>
                                                     <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name">
@@ -144,7 +144,7 @@
                                         <c:otherwise>
                                             <c:choose>
                                                 <c:when test="${unsubmittedApp != null}">
-                                                    <input type="text" name="email" class="form-control" id="email" value="${unsubmittedApp.email}">
+                                                    <input type="text" name="email" class="form-control" id="email" value="<c:out value="${unsubmittedApp.email}"></c:out>">
                                                 </c:when>
                                                 <c:otherwise>
                                                     <input type="text" name="email" class="form-control" id="email" placeholder="Enter email">
@@ -162,7 +162,7 @@
                                           <c:otherwise>
                                               <c:choose>
                                                   <c:when test="${unsubmittedApp != null}">
-                                                      <input type="text" name="phone" class="form-control" id="phone" value="${unsubmittedApp.phone}">
+                                                      <input type="text" name="phone" class="form-control" id="phone" value="<c:out value="${unsubmittedApp.phone}"></c:out>">
                                                   </c:when>
                                                   <c:otherwise>
                                                       <input type="text" name="phone" class="form-control" id="phone" placeholder="Ex. 123-456-7890">

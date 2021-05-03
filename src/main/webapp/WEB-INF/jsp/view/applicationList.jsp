@@ -54,7 +54,7 @@
           </div>
         <div class="main-content">
             <c:if test="${fn:length(apps) != 0}" >
-                <c:forEach items="${apps}" var="application" begin="${begin}" end="${end}">
+                <c:forEach items="${apps}" var="application" begin="${beginApp}" end="${endApp}">
                     <div class="card" style="padding: 1%; margin: 10px 25% 10px 0; ">
                         <a
                             href="<c:url value="/applications">
