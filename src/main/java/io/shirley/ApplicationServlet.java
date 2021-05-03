@@ -35,7 +35,7 @@ import javax.servlet.http.Part;
 @MultipartConfig
 public class ApplicationServlet extends HttpServlet {
     private volatile int APPLICATION_ID_SEQUENCE = 1;
-    List<Application> apps = new ArrayList<Application>();
+    private List<Application> _apps = new ArrayList<Application>();
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -48,6 +48,11 @@ public class ApplicationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String action = (String)session.getAttribute("action");
+        if (action.equals("adminLogin")) {
+            viewApplications(request, response);
+        }
         response.sendRedirect("jobs");
     }
 
@@ -105,6 +110,7 @@ public class ApplicationServlet extends HttpServlet {
         String desiredSal = request.getParameter("desiredSalary");
         String job = request.getParameter("job");
         String activeFlag = request.getParameter("active");
+        String jobTitle = request.getParameter("jobTitle");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         // Pattern from Oreilly Java Cookbook: https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s01.html
@@ -200,8 +206,9 @@ public class ApplicationServlet extends HttpServlet {
                 // add successful job application
                 HttpSession session = request.getSession();
                 session.setAttribute("submittedApp", app);
-                apps.add(app);
-                session.setAttribute("applications", apps);
+                app.setJobTitle(jobTitle);
+                _apps.add(app);
+                session.setAttribute("applications", _apps);
                 // Show success message on same page
                 session.setAttribute("unsubmittedApp", null);
                 response.sendRedirect("jobs?action=viewJob&job="+job);
@@ -228,6 +235,53 @@ public class ApplicationServlet extends HttpServlet {
         attachment.setContents(outputStream.toByteArray());
 
         return attachment;
+    }
+
+    private void viewApplications(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession();
+        if (request.getParameter("logout") != null) {
+            session.invalidate();
+            response.sendRedirect("login");
+            return;
+        }
+        
+        if (_apps != null) {
+            try {
+                int appsPerPage = 4;
+                int begin = 0;
+                int end = 0;
+                int maxPagesApp = _apps.size() / appsPerPage;
+                if (_apps.size() % appsPerPage != 0) {
+                    maxPagesApp++;
+                }
+
+                String currPageApp = request.getParameter("pageApp");
+                int pageApp = 1;
+                if (currPageApp != null && !currPageApp.equals("")) {
+                    try {
+                        pageApp = Integer.parseInt(currPageApp);
+                        if (pageApp < 1) {
+                            pageApp = 1;
+                        } else if(pageApp > maxPagesApp) {
+                            pageApp = maxPagesApp;
+                        }
+                    } catch (NumberFormatException nfe) {
+                        pageApp = 1;
+                    }
+                }
+                begin = (pageApp - 1) * appsPerPage;
+                end = begin + appsPerPage - 1;
+
+                request.setAttribute("apps", _apps);
+                request.setAttribute("beginApp", begin);
+                request.setAttribute("endApp", end);
+                request.setAttribute("maxPagesApp", maxPagesApp);
+                request.setAttribute("currPageApp", pageApp);
+                request.getRequestDispatcher("/WEB-INF/jsp/view/applicationList.jsp").forward(request, response);
+            } catch (Exception ex) {
+                // Show error page
+            }
+        } 
     }
 
 }

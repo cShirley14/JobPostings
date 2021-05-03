@@ -98,6 +98,7 @@
                                 <input type="hidden" name="action" value="submitApp" />
                                 <input type="hidden" name="job" value="${selectedJob.id}" />
                                 <input type="hidden" name="active" value="${selectedJob.active}" />
+                                <input type="hidden" name="jobTitle" value="${selectedJob.title}" />
                                 <div class="form-group">
                                     <label for="firstName">First Name</label>
                                     <c:choose>

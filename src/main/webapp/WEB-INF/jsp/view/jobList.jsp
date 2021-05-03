@@ -73,11 +73,7 @@
         <div>
             <div class="pagination justify-content-center">
                 <c:forEach var="pageNum" begin="1" end="${maxPages}">
-                    <a
-                        <c:if test="${currentPage == i}">
-                            class=""
-                        </c:if> 
-                        href="<c:url value="/jobs">
+                    <a href="<c:url value="/jobs">
                             <c:param name="page" value="${pageNum}" />
                         </c:url>">${pageNum}</a>
                 </c:forEach>
