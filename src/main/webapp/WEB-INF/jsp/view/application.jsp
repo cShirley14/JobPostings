@@ -75,27 +75,9 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="container-fluid" style="float: left; max-width: 500px; margin-top: 2%;">
-                     Test whether the application has already been marked as inactive. 
-                    <c:forEach var="app" items="">
-                        <c:if test="">
-                            <c:set var="displaySuccess" value="true"/>
-                        </c:if>
-                    </c:forEach>
-                    <c:choose>
-                        <c:when test="${displaySuccess == true}">
-                            <p style="color:green; font-weight:bold; text-align:center;">
-                                The application has been marked as inactive!
-                            </p>
-                            <c:set var="displaySuccess" value="false"/>
-                        </c:when>
-                        <c:otherwise>
-                            <form method="post" action="applications" enctype="multipart/form-data">
-                                
-                            </form>
-                        </c:otherwise>
-                    </c:choose>
-                </div>-->
+                <div class="container-fluid" style="float: left; max-width: 500px; margin-top: 2%;">
+                     
+                </div>
             </div>
         </main>
     </body>
