@@ -45,7 +45,7 @@ public class Application implements Comparable<Application> {
         this.id = 0;
         this.jobId = 0;
         this.dateTimeSubmitted = null;
-        this.active = false;
+        this.active = true;
         this.firstNameError = false;
         this.lastNameError = false;
         this.emailError = false;

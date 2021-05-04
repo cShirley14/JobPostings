@@ -107,6 +107,8 @@ public class ApplicationServlet extends HttpServlet {
             case "submitApp":
                 submitJobApplication(request, response);
                 break;
+            case "markInactive":
+                markApplicationInactive(request, response);
             default:
                 viewList(request, response);
                 break;
@@ -378,6 +380,22 @@ public class ApplicationServlet extends HttpServlet {
    
         try (ServletOutputStream stream = response.getOutputStream()) {
             stream.write(attachment.getContents());
+        }
+    }
+
+    private void markApplicationInactive(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String id = request.getParameter("inactivateId");
+        int appId = 0;
+        try {
+            appId = Integer.parseInt(id);
+        } catch (NumberFormatException nfe) {
+            return;
+        }
+        
+        for (Application app : _apps) {
+            if (app.getId() == appId) {
+                app.setActive(false);
+            }
         }
     }
 }

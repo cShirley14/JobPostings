@@ -36,7 +36,7 @@
                         </c:if>
                         <c:if test="${username != null}">
                             <li class="nav-item active">
-                                <a class="nav-link" href="<c:url value="/applications"/>">Applications<span class="sr-only"></span></a>
+                                <a class="nav-link" href="<c:url value="/applications"><c:param name="action" value="adminLogin"></c:param></c:url>">Applications<span class="sr-only"></span></a>
                             </li>
                             <li>
                                 <a class="nav-link" href="<c:url value="/login?logout" />">Logout</a>
@@ -75,9 +75,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid" style="float: left; max-width: 500px; margin-top: 2%;">
-                     
-                </div>
+                <c:choose>
+                    <c:when test="${selectedApplicant.active == true}">
+                        <div class="container-fluid" style="float: left; text-align: center; max-width: 500px; margin-top: 2%;">
+                            <h3>Mark Application as inactive:</h3>
+                            <form method="post" action="<c:url value="/applications" />" enctype="multipart/form-data">
+                                <input type="hidden" name="inactivateId" value="${selectedApplicant.id}" />
+                                <input type="hidden" name="action" value="markInactive" />
+                                <input type="submit" value="Submit" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="container-fluid" style="float: left; max-width: 500px; margin-top: 2%;">
+                            <h3 style="color:blue;">Application has been marked inactive!</h3>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </main>
     </body>
