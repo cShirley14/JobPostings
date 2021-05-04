@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +34,10 @@ import javax.servlet.http.Part;
  * @author Shirley
  */
 @WebServlet(name = "ApplicationServlet", urlPatterns = {"/applications"})
-@MultipartConfig
+@MultipartConfig(
+    fileSizeThreshold = 5_242_880, //5MB
+    maxFileSize = 20_971_520L //20MB
+)
 public class ApplicationServlet extends HttpServlet {
     private volatile int APPLICATION_ID_SEQUENCE = 1;
     private List<Application> _apps = new ArrayList<Application>();
@@ -51,10 +55,33 @@ public class ApplicationServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String action = (String)session.getAttribute("action");
-        if (action.equals("adminLogin")) {
-            viewApplications(request, response);
+        if (action == null) {
+            action = request.getParameter("action");
         }
-        response.sendRedirect("jobs");
+        String logout = (String)session.getAttribute("logout");
+        String username = (String)session.getAttribute("username");
+        
+        if ((logout != null && username != null) || 
+                logout != null) {
+            action = null;
+        } else if (logout == null && username == null) {
+            action = null;
+        }
+
+        switch (action) {
+            case "adminLogin":
+                session.setAttribute("action", null);
+                viewApplications(request, response);
+                break;
+            case "viewApp":
+                viewApplication(request,response);
+                break;
+            case "download":
+                downloadAttachment(request,response);
+            default:
+                response.sendRedirect("jobs");
+                break;
+        }
     }
 
     /**
@@ -286,4 +313,71 @@ public class ApplicationServlet extends HttpServlet {
         } 
     }
 
+    private void viewApplication(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession();
+        if (request.getParameter("logout") != null) {
+            session.invalidate();
+            response.sendRedirect("login");
+            return;
+        }
+        
+        String selectedApplicationId = request.getParameter("appId");
+        if (_apps != null) {
+            try {
+                int applicationId = Integer.parseInt(selectedApplicationId);
+                
+                for (Application app : _apps) {
+                    if (app.getId() == applicationId) {
+                        Application selectedApp = app;
+                        request.setAttribute("selectedApplicant", selectedApp);
+                        request.getRequestDispatcher("/WEB-INF/jsp/view/application.jsp").forward(request, response);
+                    }
+                }
+                // else show applications
+                request.setAttribute("action", null);
+                viewApplications(request,response);
+            } catch (Exception ex) {
+                request.setAttribute("action", null);
+                viewApplications(request,response);
+            }
+        } else {
+            request.setAttribute("action", null);
+            viewApplications(request,response);
+        }
+    }
+
+    private void downloadAttachment(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String id = request.getParameter("appId");
+        int appId = 0;
+        try {
+            appId = Integer.parseInt(id);
+        } catch (Exception ex) {
+            // Return them back to applications
+            return;
+        }
+        // Get Application
+        Application app = null;
+        for (Application application : _apps) {
+            if (application.getId() == appId) {
+                app = application;
+                break;
+            }
+        }
+        if(app == null)
+            return;
+
+        Attachment attachment = app.getAttachment();
+        if(attachment == null)
+        {
+            response.sendRedirect("tickets?action=viewApp&appId=" + appId);
+            return;
+        }
+
+        response.setHeader("Content-Disposition", "attachment; filename=" + attachment.getName());
+        response.setContentType("application/octet-stream");
+   
+        try (ServletOutputStream stream = response.getOutputStream()) {
+            stream.write(attachment.getContents());
+        }
+    }
 }

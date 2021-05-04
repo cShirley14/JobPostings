@@ -35,7 +35,7 @@
                     </c:if>
                     <c:if test="${username != null}">
                         <li class="nav-item active">
-                            <a class="nav-link" href="<c:url value="/applications"/>">Applications<span class="sr-only"></span></a>
+                            <a class="nav-link" href="<c:url value="/applications"><c:param name="action" value="adminLogin"></c:param></c:url>">Applications<span class="sr-only"></span></a>
                         </li>
                         <li>
                             <a class="nav-link" href="<c:url value="/login?logout" />">Logout</a>
@@ -59,7 +59,7 @@
                         <a
                             href="<c:url value="/applications">
                                 <c:param name="action" value="viewApp" />
-                                <c:param name="id" value="${application.id}" /></c:url>">
+                                <c:param name="appId" value="${application.id}" /></c:url>">
                             <c:out value="${application.jobTitle}"></c:out>
                         </a>
                         <p>

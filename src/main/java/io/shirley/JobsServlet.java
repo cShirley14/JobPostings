@@ -50,20 +50,6 @@ public class JobsServlet extends HttpServlet {
                 break;
         }
     }
-    
-        /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String test = "hello";
-    }
 
     private void viewList(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -126,13 +112,15 @@ public class JobsServlet extends HttpServlet {
                     }
                 }
                 // else show jobs
+                request.setAttribute("action", null);
                 viewList(request, response);
             } catch (NumberFormatException nfe) {
                 request.setAttribute("action", null);
                 viewList(request, response);
             }
         }
-        else { // Take 
+        else { 
+            request.setAttribute("action", null);
             viewList(request, response);
         }
     }

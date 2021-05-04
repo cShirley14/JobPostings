@@ -2,7 +2,9 @@ package io.shirley.domainmodels;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.OffsetTime;
 import java.util.Comparator;
+import java.util.Date;
 
 /**
  *
@@ -16,6 +18,7 @@ public class Application implements Comparable<Application> {
     private Attachment attachment;
     private double desiredSalary;
     private LocalDate earliestStartDate;
+    private Date convEarliestDate;
     private int id;
     private int jobId;
     private Instant dateTimeSubmitted;
@@ -254,6 +257,16 @@ public class Application implements Comparable<Application> {
     public void setSalaryError(boolean salaryError) {
         this.salaryError = salaryError;
     }
+
+    public Date getConvEarliestDate() {
+        this.convEarliestDate = Date.from(this.earliestStartDate.atTime(OffsetTime.MIN).toInstant());
+        return convEarliestDate;
+    }
+
+    public void setConvEarliestDate(Date convEarliestDate) {
+        this.convEarliestDate = convEarliestDate;
+    }
+    
     
     @Override
     public String toString() {
@@ -264,8 +277,4 @@ public class Application implements Comparable<Application> {
     public int compareTo(Application other) {
         return other.dateTimeSubmitted.compareTo(this.dateTimeSubmitted);
     }
-    
-    
-    
-    
 }
