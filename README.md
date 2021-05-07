@@ -15,3 +15,9 @@ _Admin Login Portal_
 
 _Admin View of Submitted Applications_
 ![Admin View of Applications](https://github.com/cShirley14/JobPostings/blob/main/resources/AdminView.jpg)
+
+_Admin View of Active Applicant_
+![Applicant Active](https://github.com/cShirley14/JobPostings/blob/main/resources/AdminViewApplication.jpg)
+
+_Admin View of Inactive Applicant_
+![Applicant Active](https://github.com/cShirley14/JobPostings/blob/main/resources/AdminViewApplicationInactive.jpg)
