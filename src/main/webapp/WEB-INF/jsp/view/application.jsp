@@ -78,7 +78,7 @@
                 <c:choose>
                     <c:when test="${selectedApplicant.active == true}">
                         <div class="container-fluid" style="float: left; text-align: center; max-width: 500px; margin-top: 2%;">
-                            <h3>Mark Application as inactive:</h3>
+                            <h3>Mark Application as Inactive:</h3>
                             <form method="post" action="<c:url value="/applications" />" enctype="multipart/form-data">
                                 <input type="hidden" name="inactivateId" value="${selectedApplicant.id}" />
                                 <input type="hidden" name="action" value="markInactive" />
