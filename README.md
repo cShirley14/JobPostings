@@ -1,5 +1,5 @@
 # JobPostings
-A demo of a job posting website written in Java, utilizing MVC architecture, hosted on a Tomcat Apache web server, pulling in job data from a tsv, and some css styling and bootstrap.
+A demo of a job posting website written in Java, utilizing MVC architecture, session cookies, hosted on a Tomcat Apache web server, pulling in job data from a tsv, and some css styling and bootstrap.
 
 _Landing Page_
 ![Landing Page](https://github.com/cShirley14/JobPostings/blob/main/resources/JobPostingsFrontPage.jpg)
